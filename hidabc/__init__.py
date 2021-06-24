@@ -2,6 +2,7 @@
 
 from typing import List, Literal
 
+
 try:
     from typing import Protocol, runtime_checkable
 except ImportError:
@@ -18,7 +19,7 @@ _ReportType = Literal[0x01, 0x02, 0x03]  # why mypy :(
 
 
 @runtime_checkable
-class Device(Protocol):
+class Interface(Protocol):
     '''
     Simple HID interface.
     '''
@@ -45,15 +46,15 @@ class Device(Protocol):
 
 
 @runtime_checkable
-class ExtendedDevice(Protocol, Device):
-    '''Builds on :py:class:`Device` and allows to access further data.'''
+class ExtendedInterface(Protocol, Interface):
+    '''Builds on :py:class:`Interface` and allows to access further data.'''
 
     def get_report_descriptor(self) -> List[int]:
         '''Fetches the HID report descriptor for the device.'''
 
 
 @runtime_checkable
-class FullDevice(Protocol, ExtendedDevice):
+class FullInterface(Protocol, ExtendedInterface):
     '''
     Provides full access to the HID interface.
     '''
