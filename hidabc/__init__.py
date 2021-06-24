@@ -4,13 +4,13 @@ import threading
 import typing
 
 from types import TracebackType
-from typing import Any, List, Literal, Optional, Type
+from typing import Any, List, Optional, Type
 
 
 try:
-    from typing import Protocol, runtime_checkable
+    from typing import Literal, Protocol, runtime_checkable
 except ImportError:
-    from typing_extensions import Protocol, runtime_checkable  # type: ignore
+    from typing_extensions import Literal, Protocol, runtime_checkable  # type: ignore
 
 
 class ReportType:
