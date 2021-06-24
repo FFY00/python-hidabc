@@ -23,9 +23,14 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+hidraw = [
+  'ioctl',
+]
 test = [
   'pytest',
   'pytest-cov',
+  'uhid',
+  'ioctl',
 ]
 docs = [
   'furo>=2021.04.11b34',
