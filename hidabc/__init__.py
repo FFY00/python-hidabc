@@ -13,6 +13,9 @@ except ImportError:
     from typing_extensions import Literal, Protocol, runtime_checkable  # type: ignore
 
 
+__version__ = '0.1.0'
+
+
 class ReportType:
     INPUT = 0x01
     OUTPUT = 0x02
