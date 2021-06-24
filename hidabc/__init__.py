@@ -56,7 +56,8 @@ class Interface(Protocol):
 class ExtendedInterface(Interface, Protocol):
     '''Builds on :py:class:`Interface` and allows to access further data.'''
 
-    def get_report_descriptor(self) -> List[int]:
+    @property
+    def report_descriptor(self) -> List[int]:
         '''Fetches the HID report descriptor for the device.'''
 
 
