@@ -1,0 +1,39 @@
+[build-system]
+build-backend = 'trampolim'
+requires = ['trampolim']
+
+[project]
+name = 'hidabc'
+version = '0.1.0'
+description = 'HID interfacing abstract protocols and platform implementations'
+readme = 'README.rst'
+requires-python = '>=3.7'
+license = { file = 'LICENSE' }
+keywords = ['hid', 'io', 'abc', 'abctract', 'abstraction', 'protocol', 'hidraw']
+authors = [
+  { name = 'Filipe Laíns', email = 'lains@riseup.net' },
+]
+classifiers = [
+  'Development Status :: 4 - Beta',
+  'Programming Language :: Python'
+]
+
+dependencies = [
+  'typing_extensions; python_version < "3.8"'
+]
+
+[project.optional-dependencies]
+test = [
+  'pytest',
+  'pytest-cov',
+]
+docs = [
+  'furo>=2021.04.11b34',
+  'sphinx~=3.0',
+]
+
+[project.urls]
+homepage = 'https://github.com/FFY00/python-hidabc'
+repository = 'https://github.com/FFY00/python-hidabc'
+documentation = 'https://hidabc.readthedocs.io'
+changelog = 'https://hidabc.readthedocs.io/en/latest/changelog.html'
