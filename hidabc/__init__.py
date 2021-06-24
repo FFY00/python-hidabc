@@ -1,12 +1,16 @@
 # SPDX-License-Identifier: MIT
 
-from typing import List, Literal
+import threading
+import typing
+
+from types import TracebackType
+from typing import Any, List, Optional, Type
 
 
 try:
-    from typing import Protocol, runtime_checkable
+    from typing import Literal, Protocol, runtime_checkable
 except ImportError:
-    from typing_extensions import Protocol, runtime_checkable  # type: ignore
+    from typing_extensions import Literal, Protocol, runtime_checkable  # type: ignore
 
 
 class ReportType:
@@ -64,3 +68,49 @@ class FullInterface(Protocol, ExtendedInterface):
 
     def set_report(self, type_: _ReportType, data: List[int]) -> List[int]:
         '''Performs a `SET_REPORT` request.'''
+
+
+class _Lock(Protocol):
+    def acquire(self) -> Any: ...
+    def release(self) -> Any: ...
+
+
+_T = typing.TypeVar('_T', bound=Interface)
+
+
+class Device(typing.Generic[_T]):
+    '''HID device. Implements a context manager to acquire the underlying interface.'''
+
+    def __init__(self, interface: _T, lock_cls: Type[_Lock] = threading.Lock) -> None:
+        self._interface = interface
+        self._lock = lock_cls()
+
+    def __enter__(self) -> _T:
+        '''Acquire the HID interface. Prevents other users using the interface at the same time.'''
+        self._lock.acquire()
+        return self._interface
+
+    def __exit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_value: Optional[BaseException],
+        traceback: Optional[TracebackType],
+    ) -> Literal[False]:
+        '''Release the HID interface.'''
+        self._lock.release()
+        return False  # False means we did not handle the exception :)
+
+    @property
+    def name(self) -> str:
+        '''Device name.'''
+        return self._interface.name
+
+    @property
+    def vid(self) -> int:
+        '''Device vendor ID.'''
+        return self._interface.vid
+
+    @property
+    def pid(self) -> int:
+        '''Device product ID.'''
+        return self._interface.pid
