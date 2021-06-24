@@ -50,7 +50,7 @@ class Interface(Protocol):
 
 
 @runtime_checkable
-class ExtendedInterface(Protocol, Interface):
+class ExtendedInterface(Interface, Protocol):
     '''Builds on :py:class:`Interface` and allows to access further data.'''
 
     def get_report_descriptor(self) -> List[int]:
@@ -58,7 +58,7 @@ class ExtendedInterface(Protocol, Interface):
 
 
 @runtime_checkable
-class FullInterface(Protocol, ExtendedInterface):
+class FullInterface(ExtendedInterface, Protocol):
     '''
     Provides full access to the HID interface.
     '''
