@@ -51,6 +51,11 @@ class Interface(Protocol):
         not support it, via ``SET_REPORT`` transfers.
         '''
 
+    def transfer(self, data: List[int]) -> List[int]:
+        '''Performs a :py:meth:`write` and then :py:meth:`read` operation'''
+        self.write(data)
+        return self.read()
+
 
 @runtime_checkable
 class ExtendedInterface(Interface, Protocol):

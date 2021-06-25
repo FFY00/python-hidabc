@@ -7,8 +7,10 @@ from typing import List
 
 import ioctl.hidraw
 
+import hidabc
 
-class HidrawInterface():
+
+class HidrawInterface(hidabc.ExtendedInterface):
     def __init__(self, path: str) -> None:
         self._hidraw = ioctl.hidraw.Hidraw(path)
         self._bus, self._vid, self._pid = self._hidraw.info

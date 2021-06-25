@@ -7,8 +7,10 @@ from typing import List, Optional
 import usb.core
 import usb.util
 
+import hidabc
 
-class PyUSBInterface():
+
+class PyUSBInterface(hidabc.Interface):
     def __init__(
         self,
         device: usb.core.Device,
