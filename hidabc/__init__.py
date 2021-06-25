@@ -72,6 +72,12 @@ class FullInterface(ExtendedInterface, Protocol):
     Provides full access to the HID interface.
     '''
 
+    def interrupt_in(self) -> List[int]:
+        '''Reads from the *INTERRUPT IN* pipe.'''
+
+    def interrupt_out(self) -> List[int]:
+        '''Writes to the *INTERRUPT OUT* pipe.'''
+
     def get_report(self, type_: _ReportType, data: List[int]) -> List[int]:
         '''Performs a `GET_REPORT` request.'''
 
