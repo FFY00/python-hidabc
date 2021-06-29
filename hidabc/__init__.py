@@ -78,10 +78,10 @@ class FullInterface(ExtendedInterface, Protocol):
     def interrupt_out(self) -> List[int]:
         '''Writes to the *INTERRUPT OUT* pipe.'''
 
-    def get_report(self, type_: _ReportType, data: List[int]) -> List[int]:
+    def get_report(self, type_: _ReportType, data: List[int], report_id: int) -> List[int]:
         '''Performs a `GET_REPORT` request.'''
 
-    def set_report(self, type_: _ReportType, data: List[int]) -> List[int]:
+    def set_report(self, type_: _ReportType, data: List[int], report_id: int) -> List[int]:
         '''Performs a `SET_REPORT` request.'''
 
 
