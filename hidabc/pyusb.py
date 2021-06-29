@@ -51,10 +51,12 @@ class PyUSBInterface(hidabc.Interface):
 
     @property
     def vid(self) -> int:
+        assert isinstance(self._device.idVendor, int)
         return self._device.idVendor
 
     @property
     def pid(self) -> int:
+        assert isinstance(self._device.idProduct, int)
         return self._device.idProduct
 
     @property

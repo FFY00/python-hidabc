@@ -18,33 +18,40 @@ class HidrawInterface(hidabc.ExtendedInterface):
     @property
     @functools.lru_cache(maxsize=None)
     def name(self) -> str:
+        assert isinstance(self._hidraw.name, str)
         return self._hidraw.name
 
     @property
     @functools.lru_cache(maxsize=None)
     def phys_name(self) -> str:
+        assert isinstance(self._hidraw.phys, str)
         return self._hidraw.phys
 
     @property
     @functools.lru_cache(maxsize=None)
     def uniq_name(self) -> str:
+        assert isinstance(self._hidraw.uniq, str)
         return self._hidraw.uniq
 
     @property
     def bus(self) -> int:
+        assert isinstance(self._bus, int)
         return self._bus
 
     @property
     def vid(self) -> int:
+        assert isinstance(self._vid, int)
         return self._vid
 
     @property
     def pid(self) -> int:
+        assert isinstance(self._pid, int)
         return self._pid
 
     @property
     @functools.lru_cache(maxsize=None)
     def report_descriptor(self) -> List[int]:
+        assert isinstance(self._hidraw.report_descriptor, list)
         return self._hidraw.report_descriptor
 
     def read(self) -> List[int]:
