@@ -63,7 +63,11 @@ class PyUSBInterface(hidabc.Interface):
     @functools.lru_cache(maxsize=None)
     def report_descriptor(self) -> List[int]:
         return list(self._device.ctrl_transfer(
-            bmRequestType=0b10000001,  # host to device, standard request, recipient is interface
+            bmRequestType=usb.util.build_request_type(
+                usb.util.CTRL_IN,
+                usb.util.CTRL_TYPE_STANDARD,
+                usb.util.CTRL_RECIPIENT_INTERFACE,
+            ),
             bRequest=0x06,  # GET_DESCRIPTOR
             wValue=0x2200,  # decriptor type = report
             wIndex=self._interface,
