@@ -1,2 +1,3 @@
 .trampolim/
 __pycache__/
+.coverage
